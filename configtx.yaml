@@ -1,0 +1,61 @@
+# configtx.yaml from aws managedblockchain
+# https://docs.aws.amazon.com/managed-blockchain/latest/managementguide/managed-blockchain-mgmt.pdf
+
+# need to modify the org's Name and ID
+
+Organizations:
+    - &Org1
+            # member id defines the organization
+        Name: m-ZORR2LUDGBHVJDASJXUH4GSEII
+# ID to load the MSP definition as
+        ID: m-ZORR2LUDGBHVJDASJXUH4GSEII
+#msp dir of org1 in the docker container
+        MSPDir: /opt/home/admin-msp
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+        AnchorPeers:
+            - Host:
+              Port: 
+    - &Org2
+        Name: m-XACH55UOCZFS5FA34V643CC2ME
+        ID: m-XACH55UOCZFS5FA34V643CC2ME
+        MSPDir: /opt/home/org2-msp 
+        AnchorPeers:
+            - Host: 
+              Port:
+################################################################################
+#
+#   SECTION: Application
+#
+#   - This section defines the values to encode into a config transaction or
+#   genesis block for application related parameters
+#
+################################################################################
+Application: &ApplicationDefaults
+        # Organizations is the list of orgs which are defined as participants on
+        # the application side of the network
+     Organizations:
+################################################################################
+#
+#   Profile
+#
+#   - Different configuration profiles may be encoded here to be specified
+#   as parameters to the configtxgen tool
+#
+################################################################################
+Profiles:
+    TwoOrgChannel:
+        Consortium: AWSSystemConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *Org1
+                - *Org2
+    OneOrgChannel:
+        Consortium: AWSSystemConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *Org1
+  

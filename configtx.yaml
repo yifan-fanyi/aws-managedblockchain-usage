@@ -6,9 +6,9 @@
 Organizations:
     - &Org1
             # member id defines the organization
-        Name: m-ZORR2LUDGBHVJDASJXUH4GSEII
+        Name: node id (org1)
 # ID to load the MSP definition as
-        ID: m-ZORR2LUDGBHVJDASJXUH4GSEII
+        ID: node id (org1)
 #msp dir of org1 in the docker container
         MSPDir: /opt/home/admin-msp
             # AnchorPeers defines the location of peers which can be used
@@ -18,8 +18,8 @@ Organizations:
             - Host:
               Port: 
     - &Org2
-        Name: m-XACH55UOCZFS5FA34V643CC2ME
-        ID: m-XACH55UOCZFS5FA34V643CC2ME
+        Name: node id (org2)
+        ID: node id (org2)
         MSPDir: /opt/home/org2-msp 
         AnchorPeers:
             - Host: 

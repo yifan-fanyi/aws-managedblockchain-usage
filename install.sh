@@ -3,6 +3,49 @@
 # create, join channel
 # install chaincode
 
+# Alex
+# 2019.07.02
+# export config for easy usage
+
+###########################################################################
+# network config
+###########################################################################
+# member id
+export MSP=node id (org1)
+# peer node endpoint
+export PEER=peer endpoint (org1)
+# orderer
+export ORDERER=ordering service endpoint
+# fabric cert endpoint
+export FABCA=cabric certificate authority endpoint
+###########################################################################
+# channel config
+###########################################################################
+# channel profile to be install
+export PROFILENAME=channel profile
+# name of new channel
+export CHANNEL=channel name
+###########################################################################
+# chaincode config
+###########################################################################
+# chaincode version
+export VERSION=version
+# chaincode name
+export NAME=chaincode name
+# name of code folder
+export CODE=chaincode folder name
+###########################################################################
+# things generally do not need to change
+###########################################################################
+# admin pem path
+export MSP_PATH=/opt/home/admin-msp
+# chaincode location .go
+export CODEFOLDER=github.com/$CODE/go
+# chaincode location .js
+export CODEFOLDERN=/opt/gopath/src/github.com/$CODE/node
+# client pem
+export ORDERER_CA=/opt/home/managedblockchain-tls-chain.pem
+
 function printHelp(){
     echo ""
     echo "Using the following command:"
@@ -23,52 +66,6 @@ function printHelp(){
     echo "      upgradeChainCodeNode"
     echo "      instantiateChainCode"
     echo ""
-}
-
-function run(){
-    if [ "$1" == "createChannel" ]
-    then
-        createChannel
-    elif [ "$1" == "fetchBlock" ]
-    then
-        fetchBlock
-    elif [ "$1" == "joinChannel" ]
-    then
-        joinChannel
-    elif [ "$1" == "channelList" ]
-    then
-        channelList
-    elif [ "$1" == "chainCodeInstantiatedList" ]
-    then
-        chainCodeInstantiatedList
-    elif [ "$1" == "chainCodeInstalledList" ]
-    then
-    chainCodeInstalledList
-    elif [ "$1" == "installChainCodeGo" ]
-    then
-        installChainCodeGo
-    elif [ "$1" == "upgradeChainCodeGo" ]
-    then
-        upgradeChainCodeGo
-    elif [ "$1" == "installChainCodeNode" ]
-    then
-        installChainCodeNode
-    elif [ "$1" == "upgradeChainCodeNode" ]
-    then
-        updateChainCodeGo
-    elif [ "$1" == "instantiateChainCode" ]
-    then
-        instantiateChainCode
-    elif [ "$1" == "org1" ]
-    then
-        org1
-    elif [ "$1" == "org2" ]
-    then
-        org2
-    else
-        echo "ERROE: no function named <$1>"
-        printHelp
-    fi
 }
 
 ###########################################################################
@@ -271,5 +268,47 @@ function chainCodeInstantiatedList(){
 }
 
 ###########################################################################
-run
+if [ "$1" == "createChannel" ]
+    then
+        createChannel
+    elif [ "$1" == "fetchBlock" ]
+    then
+        fetchBlock
+    elif [ "$1" == "joinChannel" ]
+    then
+        joinChannel
+    elif [ "$1" == "channelList" ]
+    then
+        channelList
+    elif [ "$1" == "chainCodeInstantiatedList" ]
+    then
+        chainCodeInstantiatedList
+    elif [ "$1" == "chainCodeInstalledList" ]
+    then
+    chainCodeInstalledList
+    elif [ "$1" == "installChainCodeGo" ]
+    then
+        installChainCodeGo
+    elif [ "$1" == "upgradeChainCodeGo" ]
+    then
+        upgradeChainCodeGo
+    elif [ "$1" == "installChainCodeNode" ]
+    then
+        installChainCodeNode
+    elif [ "$1" == "upgradeChainCodeNode" ]
+    then
+        updateChainCodeGo
+    elif [ "$1" == "instantiateChainCode" ]
+    then
+        instantiateChainCode
+    elif [ "$1" == "org1" ]
+    then
+        org1
+    elif [ "$1" == "org2" ]
+    then
+        org2
+    else
+        echo "ERROE: no function named <$1>"
+        printHelp
+    fi
 ###########################################################################

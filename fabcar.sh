@@ -2,8 +2,35 @@
 # 2019.06.26
 # fabcar usage
 
+
+###########################################################################
+# network config
+###########################################################################
+# member id
+export MSP=node id (org1)
+# peer node endpoint
+export PEER=peer endpoint (org1)
+# orderer
+export ORDERER=ordering service endpoint
 # peer end point of another org
-export PEERO=nd-whsha5e3ingixilyoialfxvicu.m-3jy7dw6njzhfdc224iw5pmkq2q.n-s7rkvp6y5jbh3lalkcewnqip4i.managedblockchain.us-east-1.amazonaws.com:30003
+export PEERO=peer endpoint (org2)
+###########################################################################
+# channel config
+###########################################################################
+# name of new channel
+export CHANNEL=channel name
+###########################################################################
+# chaincode config
+###########################################################################
+# chaincode name
+export NAME=chaincode name
+###########################################################################
+# things generally do not need to change
+###########################################################################
+# admin pem path
+export MSP_PATH=/opt/home/admin-msp
+# client pem
+export ORDERER_CA=/opt/home/managedblockchain-tls-chain.pem
 
 function printHelp(){
     echo ""
@@ -18,26 +45,6 @@ function printHelp(){
     echo "  to change the car owner:"
     echo "      '{\"Args\":[\"changeCarOwner\",\"<key>\",\"<newowner>\"]}'"
     echo ""
-}
-
-function run(){
-    COMMAND=$2
-    if [ "$1" == "initLedger" ]
-    then
-        initLedger
-    elif [ "$1" == "queryAllCars" ]
-    then
-        queryAllCars
-    elif [ "$1" == "createCar" ]
-    then
-        createCar
-    elif [ "$1" == "changeCarOwner" ]
-    then
-        changeCarOwner
-    else
-        echo "ERROE in using fabcar: no function named <$1>"
-        printHelp
-    fi
 }
 
 ###########################################################################
@@ -121,5 +128,21 @@ function changeCarOwner(){
 }
 
 ###########################################################################
-run
+COMMAND=$2
+if [ "$1" == "initLedger" ]
+then
+    initLedger
+elif [ "$1" == "queryAllCars" ]
+then
+    queryAllCars        
+elif [ "$1" == "createCar" ]
+then
+    createCar
+elif [ "$1" == "changeCarOwner" ]
+then
+    changeCarOwner
+else
+    echo "ERROE in using fabcar: no function named <$1>"
+    printHelp
+fi
 ###########################################################################

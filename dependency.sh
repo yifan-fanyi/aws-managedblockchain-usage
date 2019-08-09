@@ -1,4 +1,3 @@
-# Alex
 # 2019.06.30
 # Install Basic blockchain dependence
 # AWS managedblockchain on Amazon Linux EC2 instance
@@ -40,7 +39,8 @@ echo ""
     echo 'export PATH=$GOROOT/bin:$PATH' >> ~/.bashrc
     echo 'export PATH=$PATH:/home/ec2-user/go/src/github.com/hyperledger/fabric-ca/bin' >> ~/.bashrc
     source ~/.bashrc
-
+    source ~/.bashrc
+    
 echo "================ installing fabric-ca =============="
     go get -u github.com/hyperledger/fabric-ca/cmd/...
     cd /home/ec2-user/go/src/github.com/hyperledger/fabric-ca
@@ -55,7 +55,9 @@ echo "============== cloning fabric-samples =============="
 echo ""
 
 echo "================= get docker images ================"
+    cd /home/ec2-user
     sudo /usr/local/bin/docker-compose -f docker-compose-cli.yaml up -d
 echo ""
 
+echo "need to source ~/.bashrc again"
 echo "Next step is Step 4 in AWS BC totural: https://docs.aws.amazon.com/managed-blockchain/latest/managementguide/managed-blockchain-mgmt.pdf"

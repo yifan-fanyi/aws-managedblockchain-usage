@@ -1,50 +1,5 @@
-# Alex
-# 2019.06.27
-# create, join channel
-# install chaincode
-
-# Alex
-# 2019.07.02
-# export config for easy usage
-
-###########################################################################
-# network config
-###########################################################################
-# member id
-export MSP=node id (org1)
-# peer node endpoint
-export PEER=peer endpoint (org1)
-# orderer
-export ORDERER=ordering service endpoint
-# fabric cert endpoint
-export FABCA=cabric certificate authority endpoint
-###########################################################################
-# channel config
-###########################################################################
-# channel profile to be install
-export PROFILENAME=channel profile
-# name of new channel
-export CHANNEL=channel name
-###########################################################################
-# chaincode config
-###########################################################################
-# chaincode version
-export VERSION=version
-# chaincode name
-export NAME=chaincode name
-# name of code folder
-export CODE=chaincode folder name
-###########################################################################
-# things generally do not need to change
-###########################################################################
-# admin pem path
-export MSP_PATH=/opt/home/admin-msp
-# chaincode location .go
-export CODEFOLDER=github.com/$CODE/go
-# chaincode location .js
-export CODEFOLDERN=/opt/gopath/src/github.com/$CODE/node
-# client pem
-export ORDERER_CA=/opt/home/managedblockchain-tls-chain.pem
+# 2019.06.30
+# enviroment varibles are need before using
 
 function printHelp(){
     echo ""
@@ -216,7 +171,7 @@ function upgradeChainCodeNode(){
             -c '{"Args":["init"]}' \
             -l node \
             -v $VERSION \
-            -p "$CODEFOLDERN"
+            -p $CODEFOLDERN \
             --tls \
             --cafile $ORDERER_CA
     echo "======= chaincode $NAME in channel: $CHANNEL upgraded"
@@ -297,7 +252,7 @@ if [ "$1" == "createChannel" ]
         installChainCodeNode
     elif [ "$1" == "upgradeChainCodeNode" ]
     then
-        updateChainCodeGo
+        upgradeChainCodeNode
     elif [ "$1" == "instantiateChainCode" ]
     then
         instantiateChainCode

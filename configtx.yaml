@@ -4,58 +4,54 @@
 # need to modify the org's Name and ID
 
 Organizations:
-    - &Org1
-            # member id defines the organization
-        Name: node id (org1)
-# ID to load the MSP definition as
-        ID: node id (org1)
-#msp dir of org1 in the docker container
-        MSPDir: /opt/home/admin-msp
-            # AnchorPeers defines the location of peers which can be used
-            # for cross org gossip communication.  Note, this value is only
-            # encoded in the genesis block in the Application section context
+    - &ECS
+        Name: m-6D7DAUJX3ZB7PDRGPN7H4DQKUM
+        ID: m-6D7DAUJX3ZB7PDRGPN7H4DQKUM
+        MSPDir: /opt/home/ECS-msp
         AnchorPeers:
             - Host:
               Port: 
-    - &Org2
-        Name: node id (org2)
-        ID: node id (org2)
-        MSPDir: /opt/home/org2-msp 
+    - &CIS
+        Name: m-VO6B4BAF2BG5JC3FREEHMH22P4
+        ID: m-VO6B4BAF2BG5JC3FREEHMH22P4
+        MSPDir: /opt/home/CIS-msp 
         AnchorPeers:
             - Host: 
               Port:
-################################################################################
-#
-#   SECTION: Application
-#
-#   - This section defines the values to encode into a config transaction or
-#   genesis block for application related parameters
-#
-################################################################################
+    - &DAlab
+        Name: m-MAZSHE6U7ZFNJMYV2MNTPQC46Q
+        ID: m-MAZSHE6U7ZFNJMYV2MNTPQC46Q
+        MSPDir: /opt/home/DAlab-msp
+        AnchorPeers:
+            - Host:
+              Port:
+
 Application: &ApplicationDefaults
-        # Organizations is the list of orgs which are defined as participants on
-        # the application side of the network
      Organizations:
-################################################################################
-#
-#   Profile
-#
-#   - Different configuration profiles may be encoded here to be specified
-#   as parameters to the configtxgen tool
-#
-################################################################################
+
 Profiles:
-    TwoOrgChannel:
+    # channel with all the 3 orgs
+    CommonChannel:
         Consortium: AWSSystemConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Org1
-                - *Org2
-    OneOrgChannel:
+                - *ECS
+                - *CIS
+                - *DAlab
+    # channel between ECS and CIS
+    ECSnCISChannel:
         Consortium: AWSSystemConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Org1
-  
+                - *ECS
+                - *CIS
+    # channel between CIS and DA
+    CISnDAChannel:
+        Consortium: AWSSystemConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *CIS
+                - *DAlab

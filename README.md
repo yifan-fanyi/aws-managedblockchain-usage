@@ -20,19 +20,19 @@
     before next step
 
     then run step 4.1
-    ```
-    aws s3 cp s3://us-east-1.managedblockchain/etc/managedblockchain-tls-chain.pem \
-        /home/ec2-user/managedblockchain-tls-chain.pem
-    openssl x509 -noout -text -in /home/ec2-user/managedblockchain-tls-chain.pem
-    ```
+```
+aws s3 cp s3://us-east-1.managedblockchain/etc/managedblockchain-tls-chain.pem \
+    /home/ec2-user/managedblockchain-tls-chain.pem
+openssl x509 -noout -text -in /home/ec2-user/managedblockchain-tls-chain.pem
+```
     step 4.2 and 4.3
-    ```
-    fabric-ca-client enroll \
-        -u https://$ADMINUSER:$ADMINPASS@$FABCA \
-        --tls.certfiles /home/ec2-user/managedblockchain-tls-chain.pem \
-        -M /home/ec2-user/admin-msp
-    cp -r admin-msp/signcerts admin-msp/admincerts
-    ```
+```
+fabric-ca-client enroll \
+    -u https://$ADMINUSER:$ADMINPASS@$FABCA \
+    --tls.certfiles /home/ec2-user/managedblockchain-tls-chain.pem \
+    -M /home/ec2-user/admin-msp
+cp -r admin-msp/signcerts admin-msp/admincerts
+```
     aws configure may need to be complete before proceed to step 4.2
 
 ### install.sh

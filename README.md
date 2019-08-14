@@ -1,11 +1,13 @@
 ### Alex
 ### 2019.07.05
 according to https://docs.aws.amazon.com/managed-blockchain/latest/managementguide/managed-blockchain-mgmt.pdf
+
 before using these you need to have:
-    a blockchain network in AWS managedblockchain 
-        either one or two member with one peer each with VPC endpoint created
-    EC2 instances with elastic IP
-         both instances using same security group and region as totural mentioned
+
+>a blockchain network in AWS managedblockchain
+>>either one or two member with one peer each with VPC endpoint created
+>EC2 instances with elastic IP
+>>both instances using same security group and region as totural mentioned
 
 ### dependency.sh
 step 3

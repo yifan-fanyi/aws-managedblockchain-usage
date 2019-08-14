@@ -10,35 +10,33 @@
          both instances using same security group and region as totural mentioned
 
 ### dependency.sh
-    step 3
-    install the basic dependency of fabric
+step 3
+install the basic dependency of fabric
+it is better to run
 
-    it is better to run
-source ~/.bashrc
+    source ~/.bashrc
+before next step,
+then run step 4.1
 
-    before next step
+    aws s3 cp s3://us-east-1.managedblockchain/etc/managedblockchain-tls-chain.pem \
+        /home/ec2-user/managedblockchain-tls-chain.pem
+    openssl x509 -noout -text -in /home/ec2-user/managedblockchain-tls-chain.pem
+step 4.2 and 4.3   
 
-    then run step 4.1
-aws s3 cp s3://us-east-1.managedblockchain/etc/managedblockchain-tls-chain.pem \
-    /home/ec2-user/managedblockchain-tls-chain.pem
-openssl x509 -noout -text -in /home/ec2-user/managedblockchain-tls-chain.pem
-
-    step 4.2 and 4.3   
-fabric-ca-client enroll \
-    -u https://$ADMINUSER:$ADMINPASS@$FABCA \
-    --tls.certfiles /home/ec2-user/managedblockchain-tls-chain.pem \
-    -M /home/ec2-user/admin-msp
-cp -r admin-msp/signcerts admin-msp/admincerts
-
-    aws configure may need to be complete before proceed to step 4.2
+    fabric-ca-client enroll \
+        -u https://$ADMINUSER:$ADMINPASS@$FABCA \
+        --tls.certfiles /home/ec2-user/managedblockchain-tls-chain.pem \
+        -M /home/ec2-user/admin-msp
+    cp -r admin-msp/signcerts admin-msp/admincerts
+aws configure may need to be complete before proceed to step 4.2
 
 ### install.sh
-    step 6 
-    create and join channel using environment varibales provided in export.sh
-    install chaincode in either node or go version
-    update chaincode (environment varibale should be updated as well)
-    instantiate chaincode
+step 6 
+create and join channel using environment varibales provided in export.sh
+install chaincode in either node or go version
+update chaincode (environment varibale should be updated as well)
+instantiate chaincode
 
 ### fabcar.sh
-    demo of using fabcar
-    before starting, edit it to give the another member peer's endpoint
+demo of using fabcar
+before starting, edit it to give the another member peer's endpoint

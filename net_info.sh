@@ -3,7 +3,7 @@
 
 # network
 export NETWORKID=<network ID (n-)>
-export ORDERER=<orderer ID (orderer->>
+export ORDERER=<orderer ID (orderer-)>
 
 # org1
 export ORGNAME=<member ID (m-)>

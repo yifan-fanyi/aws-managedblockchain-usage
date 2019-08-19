@@ -19,6 +19,8 @@ function printHelp(){
     echo "      upgradeChainCodeGo"
     echo "      installChainCodeNode"
     echo "      upgradeChainCodeNode"
+    echo "      packageInstalledChainCode"
+    echo "      installChainCodePackage"
     echo "      instantiateChainCode"
     echo ""
 }
@@ -178,6 +180,36 @@ function upgradeChainCodeNode(){
     echo ""
 }
 
+function packageInstalledChainCode(){
+    docker exec \
+        -e "CORE_PEER_TLS_ENABLED=true" \
+        -e "CORE_PEER_TLS_ROOTCERT_FILE=$ORDERER_CA" \
+        -e "CORE_PEER_ADDRESS=$PEER" \
+        -e "CORE_PEER_LOCALMSPID=$MSP" \
+        -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH" \
+        cli peer chaincode package /opt/home/"$OUT".out \
+            -n $NAME \
+            -l node \
+            -p $CODEFOLDERN \
+            -v $VERSION
+    echo "need sudo to give right to copy .out file"
+    sudo chmod -R 755 experian_new.out
+    echo "======= package chaincode $NAME version $VERSION to /opt/home/"$OUT".out"
+    echo ""
+}
+
+function installChainCodePackage(){
+    docker exec \
+        -e "CORE_PEER_TLS_ENABLED=true" \
+        -e "CORE_PEER_TLS_ROOTCERT_FILE=$ORDERER_CA" \
+        -e "CORE_PEER_ADDRESS=$PEER" \
+        -e "CORE_PEER_LOCALMSPID=$MSP" \
+        -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH" \
+        cli peer chaincode install /opt/home/"$OUT".out
+    echo "======= install chaincode package from /opt/home/"$OUT".out"
+    echo ""
+}
+
 function instantiateChainCode(){
     docker exec \
         -e "CORE_PEER_TLS_ENABLED=true" \
@@ -256,6 +288,12 @@ if [ "$1" == "createChannel" ]
     elif [ "$1" == "instantiateChainCode" ]
     then
         instantiateChainCode
+    elif [ "$1" == "packageInstalledChainCode" ]
+    then
+        packageInstalledChainCode
+    elif [ "$1" == "installChainCodePackage" ]
+    then
+        installChainCodePackage
     elif [ "$1" == "org1" ]
     then
         org1

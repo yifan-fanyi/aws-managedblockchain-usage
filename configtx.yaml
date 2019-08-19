@@ -4,54 +4,21 @@
 # need to modify the org's Name and ID
 
 Organizations:
-    - &ECS
-        Name: m-6D7DAUJX3ZB7PDRGPN7H4DQKUM
-        ID: m-6D7DAUJX3ZB7PDRGPN7H4DQKUM
-        MSPDir: /opt/home/ECS-msp
+    - &org1
+        Name: <member ID>
+        ID: <member ID>
+        MSPDir: /opt/home/org1-msp
         AnchorPeers:
             - Host:
               Port: 
-    - &CIS
-        Name: m-VO6B4BAF2BG5JC3FREEHMH22P4
-        ID: m-VO6B4BAF2BG5JC3FREEHMH22P4
-        MSPDir: /opt/home/CIS-msp 
-        AnchorPeers:
-            - Host: 
-              Port:
-    - &DAlab
-        Name: m-MAZSHE6U7ZFNJMYV2MNTPQC46Q
-        ID: m-MAZSHE6U7ZFNJMYV2MNTPQC46Q
-        MSPDir: /opt/home/DAlab-msp
-        AnchorPeers:
-            - Host:
-              Port:
 
 Application: &ApplicationDefaults
      Organizations:
 
 Profiles:
-    # channel with all the 3 orgs
-    CommonChannel:
+    OneOrgChannel:
         Consortium: AWSSystemConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *ECS
-                - *CIS
-                - *DAlab
-    # channel between ECS and CIS
-    ECSnCISChannel:
-        Consortium: AWSSystemConsortium
-        Application:
-            <<: *ApplicationDefaults
-            Organizations:
-                - *ECS
-                - *CIS
-    # channel between CIS and DA
-    CISnDAChannel:
-        Consortium: AWSSystemConsortium
-        Application:
-            <<: *ApplicationDefaults
-            Organizations:
-                - *CIS
-                - *DAlab
+                - *org1
